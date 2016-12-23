@@ -1,0 +1,30 @@
+% input: image to be analyzed and extract 2 first moments from each R,G,B
+% output: 1x6 vector containing the 2 first color momenst from each R,G,B
+% channel
+rgbimage=imread('C:\Users\vandana\Desktop\ashish.jpg');
+hsv = rgb2hsv(rgbImage);
+% extract color channels
+% Extract out the individual channels.
+h = hsv(:,:,1);
+s = hsv(:,:,2);
+v = hsv(:,:,3);
+
+
+% compute 2 first color moments from each channel
+meanh = mean( h(:) );
+stdh = std( h(:) );
+skewh = skewness( h(:) );
+means = mean( s(:) );
+stds  = std( s(:) );
+skews = skewness( s(:) );
+meanv = mean( v(:) );
+stdv = std( v(:) );
+skewv= skewness( v(:) );
+
+% construct output vector
+colorMoments = zeros(1, 9);
+colorMoments(1, :) = [meanh stdh skewh means stds skews meanv stdv skewv]
+
+% clear workspace
+%clear('R', 'G', 'B', 'meanR', 'stdR', 'meanG', 'stdG', 'meanB', 'stdB');
+
